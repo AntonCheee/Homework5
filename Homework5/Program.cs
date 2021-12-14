@@ -8,10 +8,10 @@ namespace Homework5
         {
             Random random = new Random();
 
-            int size1 = GenerateNumber(4, 6, random);
+            int size1 = GenerateNumber(6, 6, random);
             int size2 = GenerateNumber(4, 6, random);
 
-            int[,] array = new int[size1, size2];
+            int[,] array = new int[size1, size1];
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
@@ -32,7 +32,7 @@ namespace Homework5
 
             Console.WriteLine();
 
-            int[,] result = Task6(array);
+            int[,] result = ReflectElementsRelativeToDiagonal(array);
 
             for (int i = 0; i < size1; i++)
             {
@@ -51,43 +51,21 @@ namespace Homework5
             //Console.WriteLine(result3);
         }
 
-        private static int Task1(int[,] array)
+        private static int FindMinElement(int[,] array)
         {
-            int minElement = array[0, 0];
-
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if (minElement > array[i, j])
-                    {
-                        minElement = array[i, j];
-                    }
-                }
-            }
+            int minElement = array[FindIndexMinElement(array).Item1, FindIndexMinElement(array).Item2];
 
             return minElement;
         }
 
-        private static int Task2(int[,] array)
+        private static int FindMaxElement(int[,] array)
         {
-            int maxElement = array[0, 0];
-
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if (maxElement < array[i, j])
-                    {
-                        maxElement = array[i, j];
-                    }
-                }
-            }
+            int maxElement = array[FindIndexMaxElement(array).Item1, FindIndexMaxElement(array).Item2];
 
             return maxElement;
         }
 
-        private static (int, int) Task3(int[,] array)
+        private static (int, int) FindIndexMinElement(int[,] array)
         {
             (int, int) indexMaxElement = (0, 0);
 
@@ -105,7 +83,7 @@ namespace Homework5
             return indexMaxElement;
         }
 
-        private static (int, int) Task4(int[,] array)
+        private static (int, int) FindIndexMaxElement(int[,] array)
         {
             (int, int) indexMinElement = (0, 0);
 
@@ -124,7 +102,7 @@ namespace Homework5
             return indexMinElement;
         }
 
-        private static int Task5(int[,] array)
+        private static int FindElementMoreThanAllNeighbor(int[,] array)
         {
             int count = 0;
 
@@ -156,16 +134,13 @@ namespace Homework5
             return count;
         }
 
-        private static int[,] Task6(int[,] array)
+        private static int[,] ReflectElementsRelativeToDiagonal(int[,] array)
         {
             for (int i = 0; i < array.GetLength(0); i++)
             {
-                for (int j = 0; j < array.GetLength(1); j++)
+                for (int j = i + 1; j < array.GetLength(1); j++)
                 {
-                    if (j > i)
-                    {
-                        Swap(ref array[i, j], ref array[j, i]);
-                    }
+                    Swap(ref array[i, j], ref array[j, i]);
                 }
             }
 

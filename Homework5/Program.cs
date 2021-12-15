@@ -53,14 +53,20 @@ namespace Homework5
 
         private static int FindMinElement(int[,] array)
         {
-            int minElement = array[FindIndexMinElement(array).Item1, FindIndexMinElement(array).Item2];
+            int i = FindIndexMinElement(array).Item1;
+            int j = FindIndexMinElement(array).Item2;
+
+            int minElement = array[i, j];
 
             return minElement;
         }
 
         private static int FindMaxElement(int[,] array)
         {
-            int maxElement = array[FindIndexMaxElement(array).Item1, FindIndexMaxElement(array).Item2];
+            int i = FindIndexMaxElement(array).Item1;
+            int j = FindIndexMaxElement(array).Item2;
+
+            int maxElement = array[i, j];
 
             return maxElement;
         }
